@@ -1,0 +1,26 @@
+{
+  "name": "online-certificate-request-system",
+  "version": "1.0.0",
+  "description": "CertiFlow - Online Certificate Request System Backend in Node.js (Express) with MySQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "express",
+    "nodejs",
+    "mysql",
+    "certificate-portal",
+    "student-services"
+  ],
+  "author": "Aakanksha Bosmiya",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.11.0",
+    "mysql2": "^3.19.1"
+  }
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CertiFlow - Online Certificate Request System</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <a href="/" class="nav-brand">
+      <div class="brand-icon">✓</div>
+      CertiFlow
+    </a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link active" id="navStudent">Student Portal</a>
+      <a href="#track" class="nav-link" id="navTrack">Track Status</a>
+      <a href="/admin" class="nav-link" id="navAdmin">Admin</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <div class="banner-badge">STUDENT SERVICES</div>
+      <h1 class="banner-title">Online Certificate Request System</h1>
+      <p class="banner-desc">Submit certificate requests online, track progress, and avoid repeated office visits.</p>
+    </section>
+
+    <!-- Alert Message Box -->
+    <div id="alertBox" class="alert"></div>
+
+    <!-- Request Submission Form Card -->
+    <section class="card" id="formCard">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h2 class="card-title" style="margin-bottom: 0;">Certificate Request Form</h2>
+        <button type="button" class="btn btn-secondary btn-sm" id="btnToggleTrack">Track An Existing Request</button>
+      </div>
+
+      <form id="requestForm" action="/request.php" method="POST">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="student_name">Student Name</label>
+            <input type="text" id="student_name" name="student_name" placeholder="e.g. Krish Shah" required>
+          </div>
+
+          <div class="form-group">
+            <label for="enrollment_no">Enrollment No.</label>
+            <input type="text" id="enrollment_no" name="enrollment_no" placeholder="e.g. LDCEIT2026-041" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="e.g. krish@example.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="certificate_type">Certificate Type</label>
+            <select id="certificate_type" name="certificate_type" required>
+              <option value="" disabled selected>Select Certificate Type</option>
+              <option value="Bonafide Certificate">Bonafide Certificate</option>
+              <option value="Character Certificate">Character Certificate</option>
+              <option value="Course Completion">Course Completion</option>
+              <option value="Transfer Certificate">Transfer Certificate</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="purpose">Purpose</label>
+            <textarea id="purpose" name="purpose" placeholder="e.g. For internship documentation at tech firm" required minlength="10"></textarea>
+            <small style="color: #64748b; font-size: 0.8rem; margin-top: 2px;">Minimum 10 characters describing the certificate requirement.</small>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.75rem;">
+          <button type="submit" class="btn btn-primary" id="btnSubmit">
+            Submit Request
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Success Confirmation Card (Matches 02_success_output.png) -->
+    <section class="card success-card" id="successCard" style="display: none;">
+      <div class="success-circle">✓</div>
+      <h2 class="success-title">Request Submitted Successfully</h2>
+      <p class="success-subtitle">Your certificate request has been registered.</p>
+      
+      <div class="request-id-badge" id="displayRequestId">
+        Request ID: CR-0042
+      </div>
+
+      <div class="status-badge-text" id="displayRequestStatus">
+        Status: Pending
+      </div>
+
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+        <button class="btn btn-primary" id="btnNewRequest">Submit Another Request</button>
+        <button class="btn btn-secondary" id="btnTrackSubmitted">View Tracking Details</button>
+        <a href="/admin" class="btn btn-secondary">Open Admin Dashboard</a>
+      </div>
+    </section>
+
+    <!-- Tracking Section -->
+    <section class="card" id="trackCard" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h2 class="card-title" style="margin-bottom: 0;">Track Certificate Request Status</h2>
+        <button type="button" class="btn btn-secondary btn-sm" id="btnBackToForm">Back to Request Form</button>
+      </div>
+
+      <p style="color: #64748b; margin-bottom: 1.5rem; font-size: 0.925rem;">
+        Enter your <strong>Request ID</strong> (e.g. <code>CR-0042</code> or <code>42</code>) or your <strong>Enrollment No.</strong> to view live status.
+      </p>
+
+      <form id="trackForm" style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+        <input type="text" id="trackInput" placeholder="Enter Request ID or Enrollment No..." required style="flex: 1;">
+        <button type="submit" class="btn btn-primary" style="white-space: nowrap;">Track Status</button>
+      </form>
+
+      <div id="trackResult" style="display: none;">
+        <!-- Filled dynamically -->
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>CertiFlow &bull; Online Certificate Request System &bull; Powered by Node.js & Express with MongoDB</p>
+  </footer>
+
+  <script src="/js/student.js"></script>
+</body>
+</html>
